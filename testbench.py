@@ -36,7 +36,6 @@ from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
 import kc2qol
-import kc2qol, numpy
 import numpy
 from gnuradio import qtgui
 
@@ -87,7 +86,7 @@ class testbench(gr.top_block, Qt.QWidget):
         self.sym_per_arm = sym_per_arm = 8
         self.nfilts = nfilts = 16
         self.ideal_taps = ideal_taps = firdes.root_raised_cosine(int(sps), samp_rate, symbol_rate, rolloff, ntaps)
-        self.thresh = thresh = 22
+        self.thresh = thresh = 70
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), rolloff, int(sym_per_arm*sps*nfilts))
         self.quant_taps = quant_taps = [round(2**15 * x) / 2**15 for x in ideal_taps]
         self.constel = constel = digital.constellation_calcdist([+0.70711 + +0.70711j, +1.0 + +0.0j, -1.0 + +0.0j, -0.70711 + -0.70711j, +0.0 + +1.0j, +0.70711 + -0.70711j, -0.70711 + +0.70711j, -0.0 + -1.0j], list(range(0,8)),
@@ -238,7 +237,7 @@ class testbench(gr.top_block, Qt.QWidget):
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.kc2qol_ldpc_decoder_fb_0 = kc2qol.ldpc_decoder_fb()
-        self.kc2qol_dvbs2_pl_chunker_0_0 = kc2qol.dvbs2_pl_chunker(64800, pmt.intern('corr_est'), 90*3, numpy.float32)
+        self.kc2qol_dvbs2_pl_deframer_0 = kc2qol.dvbs2_pl_deframer(21600, pmt.intern('corr_est'), 0)
         self.kc2qol_dvbs2_8psk_demod_0 = kc2qol.dvbs2_8psk_demod(None)
         self.digital_symbol_sync_xx_0 = digital.symbol_sync_cc(
             digital.TED_MOD_MUELLER_AND_MULLER,
@@ -252,20 +251,14 @@ class testbench(gr.top_block, Qt.QWidget):
             digital.IR_MMSE_8TAP,
             128,
             [])
-        self.digital_corr_est_cc_0 = digital.corr_est_cc([(0.70711+0.70711j), (0.70711-0.70711j), (-0.70711-0.70711j), (-0.70711+0.70711j), (0.70711+0.70711j), (-0.70711+0.70711j), (-0.70711-0.70711j), (0.70711-0.70711j), (0.70711+0.70711j), (0.70711-0.70711j), (0.70711+0.70711j), (-0.70711+0.70711j), (-0.70711-0.70711j), (-0.70711+0.70711j), (-0.70711-0.70711j), (0.70711-0.70711j), (-0.70711-0.70711j), (-0.70711+0.70711j), (-0.70711-0.70711j), (-0.70711+0.70711j), (0.70711+0.70711j), (-0.70711+0.70711j), (0.70711+0.70711j), (-0.70711+0.70711j), (-0.70711-0.70711j), (-0.70711+0.70711j)], 1, 1, thresh / 26, digital.THRESHOLD_ABSOLUTE)
-        self.digital_binary_slicer_fb_0 = digital.binary_slicer_fb()
+        self.digital_corr_est_cc_0 = digital.corr_est_cc([0.707+0.707j, 0.707-0.707j, -0.707-0.707j, -0.707+0.707j, 0.707+0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, 0.707+0.707j, 0.707-0.707j, 0.707+0.707j, -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, 0.707+0.707j, -0.707+0.707j, 0.707+0.707j, -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, 0.707+0.707j, 0.707-0.707j, 0.707+0.707j, -0.707+0.707j, 0.707+0.707j, -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, 0.707+0.707j, -0.707+0.707j, 0.707+0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, -0.707-0.707j, 0.707-0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, 0.707+0.707j, 0.707-0.707j, -0.707-0.707j, 0.707-0.707j, -0.707-0.707j, 0.707-0.707j, -0.707-0.707j, -0.707+0.707j, 0.707+0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, -0.707-0.707j, -0.707+0.707j, 0.707+0.707j, -0.707+0.707j, 0.707+0.707j, 0.707-0.707j, 0.707+0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, 0.707+0.707j, 0.707-0.707j, -0.707-0.707j, -0.707+0.707j], 1, 1, thresh / 90, digital.THRESHOLD_ABSOLUTE)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
-        self.blocks_repack_bits_bb_0_0 = blocks.repack_bits_bb(1, 8, "", False, gr.GR_MSB_FIRST)
         self.blocks_repack_bits_bb_0 = blocks.repack_bits_bb(1, 8, "", False, gr.GR_MSB_FIRST)
         self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_gr_complex*1)
-        self.blocks_not_xx_0_0 = blocks.not_bb()
-        self.blocks_not_xx_0 = blocks.not_bb()
         self.blocks_multiply_const_vxx_1 = blocks.multiply_const_cc(2**-12)
         self.blocks_interleaved_short_to_complex_0 = blocks.interleaved_short_to_complex(False, False)
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_short*1, '/Users/iracigt/Developer/DVB_hat/hdl/iq_bytes.bin', False, 0 * 21690 * 2, )
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_short*1, '/Users/iracigt/Developer/DVB_hat/hdl/iq_bytes.bin', True, 0 * 21690 * 2, )
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
-        self.blocks_file_sink_3_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/iracigt/Desktop/packets_bin.bin', False)
-        self.blocks_file_sink_3_0.set_unbuffered(True)
         self.blocks_file_sink_3 = blocks.file_sink(gr.sizeof_char*1, '/Users/iracigt/Desktop/packets_ldpc.bin', False)
         self.blocks_file_sink_3.set_unbuffered(True)
         self.blocks_complex_to_mag_0 = blocks.complex_to_mag(1)
@@ -282,21 +275,16 @@ class testbench(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_file_source_0, 0), (self.blocks_interleaved_short_to_complex_0, 0))
         self.connect((self.blocks_interleaved_short_to_complex_0, 0), (self.blocks_multiply_const_vxx_1, 0))
         self.connect((self.blocks_multiply_const_vxx_1, 0), (self.blocks_add_const_vxx_0, 0))
-        self.connect((self.blocks_not_xx_0, 0), (self.blocks_repack_bits_bb_0, 0))
-        self.connect((self.blocks_not_xx_0_0, 0), (self.blocks_repack_bits_bb_0_0, 0))
         self.connect((self.blocks_repack_bits_bb_0, 0), (self.blocks_file_sink_3, 0))
-        self.connect((self.blocks_repack_bits_bb_0_0, 0), (self.blocks_file_sink_3_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.digital_symbol_sync_xx_0, 0))
-        self.connect((self.digital_binary_slicer_fb_0, 0), (self.blocks_not_xx_0_0, 0))
         self.connect((self.digital_corr_est_cc_0, 1), (self.blocks_complex_to_mag_0, 0))
         self.connect((self.digital_corr_est_cc_0, 0), (self.blocks_null_sink_0, 0))
-        self.connect((self.digital_corr_est_cc_0, 0), (self.kc2qol_dvbs2_8psk_demod_0, 0))
+        self.connect((self.digital_corr_est_cc_0, 0), (self.kc2qol_dvbs2_pl_deframer_0, 0))
         self.connect((self.digital_symbol_sync_xx_0, 0), (self.digital_corr_est_cc_0, 0))
         self.connect((self.digital_symbol_sync_xx_0, 0), (self.qtgui_const_sink_x_0_0, 0))
-        self.connect((self.kc2qol_dvbs2_8psk_demod_0, 0), (self.kc2qol_dvbs2_pl_chunker_0_0, 0))
-        self.connect((self.kc2qol_dvbs2_pl_chunker_0_0, 0), (self.digital_binary_slicer_fb_0, 0))
-        self.connect((self.kc2qol_dvbs2_pl_chunker_0_0, 0), (self.kc2qol_ldpc_decoder_fb_0, 0))
-        self.connect((self.kc2qol_ldpc_decoder_fb_0, 0), (self.blocks_not_xx_0, 0))
+        self.connect((self.kc2qol_dvbs2_8psk_demod_0, 0), (self.kc2qol_ldpc_decoder_fb_0, 0))
+        self.connect((self.kc2qol_dvbs2_pl_deframer_0, 0), (self.kc2qol_dvbs2_8psk_demod_0, 0))
+        self.connect((self.kc2qol_ldpc_decoder_fb_0, 0), (self.blocks_repack_bits_bb_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "testbench")
@@ -393,7 +381,7 @@ class testbench(gr.top_block, Qt.QWidget):
 
     def set_thresh(self, thresh):
         self.thresh = thresh
-        self.digital_corr_est_cc_0.set_threshold(self.thresh / 26)
+        self.digital_corr_est_cc_0.set_threshold(self.thresh / 90)
         self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_AUTO, qtgui.TRIG_SLOPE_POS, self.thresh, 512 / self.samp_rate , 0, "phase_est")
 
     def get_rrc_taps(self):

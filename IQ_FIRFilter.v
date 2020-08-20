@@ -73,15 +73,22 @@ wire [3:0] cur_right_idx;
 assign cur_left_idx = load_idx - state_idx;
 assign cur_right_idx = (load_idx + 2) + state_idx;
 
-wire [7:0] cur_left_samp_i;
-wire [7:0] cur_right_samp_i;
-wire [7:0] cur_left_samp_q;
-wire [7:0] cur_right_samp_q;
+reg [7:0] cur_left_samp_i;
+reg [7:0] cur_right_samp_i;
+reg [7:0] cur_left_samp_q;
+reg [7:0] cur_right_samp_q;
 
-assign cur_left_samp_i = left_mem_i[cur_left_idx];
-assign cur_right_samp_i = state_idx == 15 ? 8'b0 : right_mem_i[cur_right_idx];
-assign cur_left_samp_q = left_mem_q[cur_left_idx];
-assign cur_right_samp_q = state_idx == 15 ? 8'b0 : right_mem_q[cur_right_idx];
+always @(posedge i_clk_x16) begin
+    cur_left_samp_i <= left_mem_i[cur_left_idx];
+    cur_right_samp_i <= state_idx == 15 ? 8'b0 : right_mem_i[cur_right_idx];
+    cur_left_samp_q <= left_mem_q[cur_left_idx];
+    cur_right_samp_q <= state_idx == 15 ? 8'b0 : right_mem_q[cur_right_idx];
+end
+
+// assign cur_left_samp_i = left_mem_i[cur_left_idx];
+// assign cur_right_samp_i = state_idx == 15 ? 8'b0 : right_mem_i[cur_right_idx];
+// assign cur_left_samp_q = left_mem_q[cur_left_idx];
+// assign cur_right_samp_q = state_idx == 15 ? 8'b0 : right_mem_q[cur_right_idx];
 
 wire [15:0] sum_a_i;
 // wire [15:0] i_sum_b;
@@ -99,11 +106,14 @@ assign sum_a_i = {8'b0, cur_left_samp_i} + {8'b0, cur_right_samp_i};
 assign sum_a_q = {8'b0, cur_left_samp_q} + {8'b0, cur_right_samp_q};
 
 
-wire [15:0] cur_tap;
-assign cur_tap = taps[state_idx];
+reg [15:0] cur_tap;
+always @(posedge i_clk_x16) begin
+    cur_tap <= taps[state_idx];
+end
+// assign cur_tap = taps[state_idx];
 
 wire dsp_clr;
-assign dsp_clr = state_idx == 0;
+assign dsp_clr = state_idx == 1;
 
 wire [31:0] loopback_a_i;
 wire [31:0] loopback_a_q;
@@ -113,7 +123,7 @@ assign loopback_a_q = dsp_clr ? 32'b0 : acc_a_q;
 
 assign o_I = o_valid ? acc_a_i[23:8] : 16'b0;
 assign o_Q = o_valid ? acc_a_q[23:8] : 16'b0;
-assign o_valid = state_idx == 0;
+assign o_valid = state_idx == 1;
 assign o_ready = state_idx == 14;
 
 /* verilator lint_off PINMISSING */

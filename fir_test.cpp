@@ -127,6 +127,7 @@ public:
 const int NTAPS = 32;
 const int OVERCLK = 16;
 const int MAX_CLKS = 694080 * OVERCLK;
+// const int MAX_CLKS = 33 * OVERCLK;
 
 int main(int argc, char** argv, char** env) {
     
@@ -134,7 +135,7 @@ int main(int argc, char** argv, char** env) {
 
 
     FIR_Testbench tb;
-    tb.opentrace("FIR.vcd");
+    // tb.opentrace("FIR.vcd");
     tb.init_tb();
 
     FILE *infile = fopen("fir_in_u8.bin", "rb");
@@ -146,8 +147,8 @@ int main(int argc, char** argv, char** env) {
         if (tb.is_ready()) {
             uint8_t iq[2] = {0, 0};
             // if (tb.tick_count() < 8) {
-            //     iq[0] = 100;
-            //     iq[1] = 100;
+            //     iq[0] = 1;
+            //     iq[1] = 1;
             // }
             fread(iq, sizeof(uint8_t), 2, infile);
             tb.set_data(iq[0], iq[1]);

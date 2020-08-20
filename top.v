@@ -102,7 +102,7 @@ end
 assign valid = dvalid && fvalid;
 
 assign mod_sym = (index < 90) ? header_sym : shifter_sym;
-assign gc_reset = index < 90 || 1;
+assign gc_reset = index < 90 || 0;
 assign shift_hold = index < 88; // two cycles early to allow it to fill
 assign next_data = (index < 21687) && (index > 88) && (div == 0) && shifter_irq; // supress the last irq
 assign shifter_rst = index == 0; // Reset shifter with each new packet

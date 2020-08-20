@@ -211,7 +211,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '22'
+    value: '70'
   states:
     bus_sink: false
     bus_source: false
@@ -230,7 +230,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [647, 802]
+    coordinate: [394, 755]
     rotation: 0
     state: true
 - name: blocks_add_const_vxx_0
@@ -264,7 +264,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [733, 690]
+    coordinate: [732, 690]
     rotation: 0
     state: enabled
 - name: blocks_file_sink_0_1
@@ -320,7 +320,7 @@ blocks:
     bus_structure: null
     coordinate: [521, 333]
     rotation: 180
-    state: enabled
+    state: disabled
 - name: blocks_file_source_0
   id: blocks_file_source
   parameters:
@@ -333,7 +333,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: 0 * 21690 * 2
-    repeat: 'False'
+    repeat: 'True'
     type: short
     vlen: '1'
   states:
@@ -378,22 +378,6 @@ blocks:
     coordinate: [517, 167]
     rotation: 0
     state: enabled
-- name: blocks_not_xx_0
-  id: blocks_not_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: byte
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [364, 437]
-    rotation: 0
-    state: enabled
 - name: blocks_not_xx_0_0
   id: blocks_not_xx
   parameters:
@@ -409,7 +393,7 @@ blocks:
     bus_structure: null
     coordinate: [371, 481]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_null_sink_0
   id: blocks_null_sink
   parameters:
@@ -466,7 +450,7 @@ blocks:
     bus_structure: null
     coordinate: [523, 430]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_repeat_0
   id: blocks_repeat
   parameters:
@@ -516,9 +500,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [197, 481]
+    coordinate: [197, 482]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: digital_corr_est_cc_0
   id: digital_corr_est_cc
   parameters:
@@ -529,14 +513,23 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     sps: '1'
-    symbols: '[(0.70711+0.70711j), (0.70711-0.70711j), (-0.70711-0.70711j), (-0.70711+0.70711j),
-      (0.70711+0.70711j), (-0.70711+0.70711j), (-0.70711-0.70711j), (0.70711-0.70711j),
-      (0.70711+0.70711j), (0.70711-0.70711j), (0.70711+0.70711j), (-0.70711+0.70711j),
-      (-0.70711-0.70711j), (-0.70711+0.70711j), (-0.70711-0.70711j), (0.70711-0.70711j),
-      (-0.70711-0.70711j), (-0.70711+0.70711j), (-0.70711-0.70711j), (-0.70711+0.70711j),
-      (0.70711+0.70711j), (-0.70711+0.70711j), (0.70711+0.70711j), (-0.70711+0.70711j),
-      (-0.70711-0.70711j), (-0.70711+0.70711j)]'
-    threshold: thresh / 26
+    symbols: '[0.707+0.707j, 0.707-0.707j, -0.707-0.707j, -0.707+0.707j, 0.707+0.707j,
+      -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, 0.707+0.707j, 0.707-0.707j, 0.707+0.707j,
+      -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, -0.707-0.707j,
+      -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, 0.707+0.707j, -0.707+0.707j, 0.707+0.707j,
+      -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, 0.707+0.707j, 0.707-0.707j, 0.707+0.707j,
+      -0.707+0.707j, 0.707+0.707j, -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j,
+      -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, -0.707-0.707j,
+      -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, 0.707+0.707j,
+      -0.707+0.707j, 0.707+0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, -0.707-0.707j,
+      0.707-0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j,
+      -0.707+0.707j, 0.707+0.707j, 0.707-0.707j, -0.707-0.707j, 0.707-0.707j, -0.707-0.707j,
+      0.707-0.707j, -0.707-0.707j, -0.707+0.707j, 0.707+0.707j, -0.707+0.707j, -0.707-0.707j,
+      0.707-0.707j, -0.707-0.707j, -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, -0.707-0.707j,
+      -0.707+0.707j, 0.707+0.707j, -0.707+0.707j, 0.707+0.707j, 0.707-0.707j, 0.707+0.707j,
+      -0.707+0.707j, -0.707-0.707j, 0.707-0.707j, 0.707+0.707j, 0.707-0.707j, -0.707-0.707j,
+      -0.707+0.707j]'
+    threshold: thresh / 90
     threshold_method: digital.THRESHOLD_ABSOLUTE
   states:
     bus_sink: false
@@ -569,7 +562,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1062, 470]
+    coordinate: [1061, 470]
     rotation: 180
     state: true
 - name: import_0
@@ -630,28 +623,27 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [472, 519]
+    coordinate: [268, 525]
     rotation: 180
-    state: true
-- name: kc2qol_dvbs2_pl_chunker_0_0
-  id: kc2qol_dvbs2_pl_chunker
+    state: enabled
+- name: kc2qol_dvbs2_pl_deframer_0
+  id: kc2qol_dvbs2_pl_deframer
   parameters:
     affinity: ''
     alias: ''
+    code: '0'
     comment: ''
-    hdr_len: 90*3
     maxoutbuf: '0'
     minoutbuf: '0'
-    packet_len: '64800'
+    packet_len: '21600'
     start_tag: pmt.intern('corr_est')
-    type: float
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [134, 686]
+    coordinate: [428, 637]
     rotation: 180
-    state: enabled
+    state: true
 - name: kc2qol_ldpc_decoder_fb_0
   id: kc2qol_ldpc_decoder_fb
   parameters:
@@ -946,8 +938,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [919, 746]
-    rotation: 0
+    coordinate: [660, 724]
+    rotation: 180
     state: enabled
 - name: qtgui_time_sink_x_0_0
   id: qtgui_time_sink_x
@@ -1055,7 +1047,6 @@ connections:
 - [blocks_file_source_0, '0', blocks_interleaved_short_to_complex_0, '0']
 - [blocks_interleaved_short_to_complex_0, '0', blocks_multiply_const_vxx_1, '0']
 - [blocks_multiply_const_vxx_1, '0', blocks_add_const_vxx_0, '0']
-- [blocks_not_xx_0, '0', blocks_repack_bits_bb_0, '0']
 - [blocks_not_xx_0_0, '0', blocks_repack_bits_bb_0_0, '0']
 - [blocks_repack_bits_bb_0, '0', blocks_file_sink_3, '0']
 - [blocks_repack_bits_bb_0_0, '0', blocks_file_sink_3_0, '0']
@@ -1063,18 +1054,16 @@ connections:
 - [blocks_throttle_0, '0', digital_symbol_sync_xx_0, '0']
 - [digital_binary_slicer_fb_0, '0', blocks_not_xx_0_0, '0']
 - [digital_corr_est_cc_0, '0', blocks_null_sink_0, '0']
-- [digital_corr_est_cc_0, '0', kc2qol_dvbs2_8psk_demod_0, '0']
+- [digital_corr_est_cc_0, '0', kc2qol_dvbs2_pl_deframer_0, '0']
 - [digital_corr_est_cc_0, '1', blocks_complex_to_mag_0, '0']
 - [digital_symbol_sync_xx_0, '0', digital_corr_est_cc_0, '0']
 - [digital_symbol_sync_xx_0, '0', qtgui_const_sink_x_0_0, '0']
 - [interp_fir_filter_xxx_0, '0', blocks_throttle_0, '0']
 - [interp_fir_filter_xxx_0, '0', qtgui_freq_sink_x_0, '0']
-- [kc2qol_dvbs2_8psk_demod_0, '0', kc2qol_dvbs2_pl_chunker_0_0, '0']
+- [kc2qol_dvbs2_8psk_demod_0, '0', kc2qol_ldpc_decoder_fb_0, '0']
 - [kc2qol_dvbs2_8psk_demod_0, '0', qtgui_time_sink_x_0_0, '0']
-- [kc2qol_dvbs2_pl_chunker_0_0, '0', blocks_file_sink_0_1, '0']
-- [kc2qol_dvbs2_pl_chunker_0_0, '0', digital_binary_slicer_fb_0, '0']
-- [kc2qol_dvbs2_pl_chunker_0_0, '0', kc2qol_ldpc_decoder_fb_0, '0']
-- [kc2qol_ldpc_decoder_fb_0, '0', blocks_not_xx_0, '0']
+- [kc2qol_dvbs2_pl_deframer_0, '0', kc2qol_dvbs2_8psk_demod_0, '0']
+- [kc2qol_ldpc_decoder_fb_0, '0', blocks_repack_bits_bb_0, '0']
 
 metadata:
   file_format: 1

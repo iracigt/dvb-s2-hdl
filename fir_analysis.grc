@@ -52,18 +52,18 @@ blocks:
     begin_tag: pmt.PMT_NIL
     comment: ''
     file: /Users/iracigt/Developer/DVB_hat/hdl/fir_out_s16.bin
-    length: ''
+    length: '66'
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
-    repeat: 'False'
+    repeat: 'True'
     type: short
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [211, 215]
+    coordinate: [210, 215]
     rotation: 0
     state: true
 - name: blocks_interleaved_short_to_complex_0
@@ -181,7 +181,7 @@ blocks:
     bus_structure: null
     coordinate: [1099, 269]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: qtgui_time_sink_x_0
   id: qtgui_time_sink_x
   parameters:
@@ -278,7 +278,7 @@ blocks:
     bus_structure: null
     coordinate: [807, 441]
     rotation: 0
-    state: disabled
+    state: enabled
 
 connections:
 - [blocks_file_source_0, '0', blocks_interleaved_short_to_complex_0, '0']
